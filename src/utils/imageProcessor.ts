@@ -1,12 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const Pica = require('pica');
+import PicaLib from 'pica';
 import type { OutputFormat } from '../types';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-const pica = new Pica() as {
+type PicaInstance = {
   resize: (from: HTMLCanvasElement, to: HTMLCanvasElement, options?: object) => Promise<HTMLCanvasElement>;
   toBlob: (canvas: HTMLCanvasElement, mimeType: string, quality?: number) => Promise<Blob>;
 };
+
+const PicaCtor = PicaLib as unknown as new () => PicaInstance;
+const pica: PicaInstance = new PicaCtor();
 
 const LONG_SIDE_MIN = 3000;
 
